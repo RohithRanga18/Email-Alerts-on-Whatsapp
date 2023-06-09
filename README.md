@@ -1,35 +1,59 @@
-Project Description: Email Alerts on WhatsApp
 
-Overview:
-The project aims to enable email alerts to be received on WhatsApp. It involves creating a system that can fetch emails from a specified email account and deliver them as WhatsApp messages to designated recipients. This integration allows users to receive important email notifications directly on their WhatsApp accounts, providing convenience and real-time access to critical information.
+# EmailAlertsOnWhatsapp
 
-Features and Functionality:
+## About
+This repository contains the code which fetches recent mails from a user's gmail account and send it to his/her Whatsapp account using [Twilio environment](https://www.twilio.com)
 
-1. Email Account Integration: The system should support the integration of one or more email accounts. Users can configure their email credentials (such as email address, password, and server settings) to enable the system to access their emails.
+## Prerequistics
+#### App Passwords
 
-2. Email Fetching: The system should periodically check the configured email accounts for new incoming emails. It can use protocols such as IMAP or POP3 to fetch emails from the email servers.
+You can read more about it [here](https://support.google.com/accounts/answer/185833?hl=en)
 
-3. Message Formatting: Once a new email is fetched, the system should process the email content and format it into a WhatsApp-friendly message format. This may involve stripping unnecessary metadata, reformatting text, and ensuring optimal readability on WhatsApp.
+## Setup
+1. Create [Twilio Account](https://www.twilio.com) and connect your whatsapp number to it (It's free)
+2. Go through the guide they provide and connect your whatsapp number such that you can send a message to the number and receive a message(Initially it would be something along the lines of "You send <your_message>")
+3. Navigate to the function page through the navigation bar at the left
 
-4. Recipient Configuration: Users should be able to specify one or more recipients for each email alert. These recipients can be individual users or groups on WhatsApp.
+![FunctionScreen](https://user-images.githubusercontent.com/65505331/126808198-6072b85f-f68b-48ae-95bf-234fe7427175.PNG)
 
-5. Message Delivery: The system should send the formatted email alerts as WhatsApp messages to the designated recipients. This can be achieved using WhatsApp Business API or a third-party WhatsApp messaging service that provides APIs for message sending.
+4. Create a new function (with any name you like) and copy the code in there.
+5. Inside the functions page, go to settings->Dependencies and make sure you have all the dependencies added as shown in the figure
 
-6. Error Handling: The system should handle any errors that occur during the email fetching or message delivery process. It should provide appropriate error messages or notifications to users to ensure they are aware of any issues.
+![dependencies](https://user-images.githubusercontent.com/65505331/126808660-2ca78dd1-ff22-47ed-8684-d1f8e11d7770.PNG)
 
-7. Configuration and Management: The project should include a user-friendly interface or configuration file where users can manage their email accounts, recipient settings, and other preferences related to the email alerts on WhatsApp.
+6. Now go to settings->Environment Variables and then set emailID as your GMail id and passKey as your App Password(If you don't know about app passwords please read the pre-requistic paragraph above)
 
-8. Security and Privacy: It is crucial to implement robust security measures to protect users' email accounts and personal information. This may include encryption of sensitive data, secure storage of email credentials, and adherence to privacy regulations.
+![environment variables](https://user-images.githubusercontent.com/65505331/126808823-5fb81434-eac2-4764-942d-affa800e6485.PNG)
 
-Implementation Considerations:
+7. Save and select Deploy all
+8. Select the 'Copy URL' present just below the code editor to copy the link of the function after deploying.
+9. Now go to Programmable Messages->Settings->Whatsapp Sandbox Settings and paste the copied URL in step 8 into the 'WHEN A MESSAGE COMES IN' field in Sandbox Configuration
+10. Save and you are good to go
 
-- Programming Language: Choose a programming language suitable for the project requirements, such as Python, Java, or Node.js, based on your team's expertise and the available resources.
 
-- WhatsApp API or Service: Depending on the chosen programming language, explore the available options for integrating with the WhatsApp platform. The WhatsApp Business API or third-party services like Twilio, MessageBird, or Nexmo can be used.
+## Features/Working
+The chatbot searches for keywords and replies accordingly. The followinf keyword are currently implemented.
+1. Help : This gets the list of all keyword
 
-- Hosting: Determine the hosting infrastructure required to run the system. It can be hosted on a cloud platform like Amazon Web Services (AWS), Google Cloud, or Microsoft Azure, or on dedicated servers based on your needs.
+![helpKeyword](https://user-images.githubusercontent.com/65505331/126810823-327886ab-c166-47bf-b32c-8bc7a98c0928.PNG)
 
-- Scalability: Consider the potential scalability requirements of the system. Ensure it can handle a growing number of users and email alerts without compromising performance.
+2. mail/email : This gets the recent 5 emails
 
-- Testing and Monitoring: Implement thorough testing procedures to identify and fix any issues. Additionally, integrate monitoring tools to track system health, performance, and error rates.
+![mails keyword](https://user-images.githubusercontent.com/65505331/126810976-a9c4e16c-6d26-4453-8373-2361c899b157.PNG)
+
+3. mail/email + unseen : This gets the latest 5 unseen emails
+
+![unseen+mail keyword](https://user-images.githubusercontent.com/65505331/126811019-cf0e970e-08ec-47db-90bc-02c37365ab01.PNG)
+
+4. Hello/Hey : This just greets you and asks if you want to get mails. If you type es then it fetches the mails.
+
+![hello keyword](https://user-images.githubusercontent.com/65505331/126811127-784f4b98-a710-47eb-97d8-0f863090cb35.PNG)
+
+## Future Plans
+* Add more functionalities/options with the email type being queried
+* Using some algorithm/AI to predict what the user is asking and reply accordingly. Currently it is hardcoded.
+* Add more features apart from email fetching (like weather, film reviews/recommendations) and turn it into a whatsapp assistant.
+
+
+
 
